@@ -1,0 +1,5 @@
+# Rules from: /Users/mgribben/tfnsw-realtime-alerts-mcp-server/.gitignore
+node_modules/
+build/
+*.log
+.env*
