@@ -1,6 +1,6 @@
 {
   "name": "tfnsw-realtime-alerts-mcp-server",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Model Context Protocol server for Transport for NSW's (TfNSW) Realtime Alerts API",
   "private": false,
   "type": "module",

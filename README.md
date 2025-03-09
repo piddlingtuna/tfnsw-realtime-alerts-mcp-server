@@ -6,8 +6,6 @@ A Model Context Protocol server for Transport for NSW's (TfNSW) Realtime Alerts 
 
 This TypeScript-based MCP server implements integration with Transport for NSW's Realtime Alerts system. It enables AI assistants to access up-to-date information about transport disruptions, planned works, and other important alerts across the NSW transport network.
 
-Please note that this server is currently in development. The functionality and available tools are subject to change and expansion as we continue to improve the server.
-
 ## Features
 
 ### Resources
@@ -40,15 +38,42 @@ The following transport modes are supported:
 
 ## Authentication
 
-This server requires authentication with the TfNSW Open Data API. You will need to:
+This server requires authentication with the TfNSW Open Data API. You will need to register for an API key at the [TfNSW Open Data Hub](https://opendata.transport.nsw.gov.au/).
 
-1. Register for an API key at the [TfNSW Open Data Hub](https://opendata.transport.nsw.gov.au/)
-2. Set the API key as an environment variable:
-  ```
-  NSW_TRANSPORT_API_KEY=your_api_key_here
-  ```
+## Installation
+
+To use with Claude Desktop, add the server config:
+
+On MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "tfnsw-realtime-alerts": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tfnsw-realtime-alerts-mcp-server"
+      ],
+      "env": {
+        "NSW_TRANSPORT_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+Replace `"your_api_key_here"` with your TfNSW API key from the [TfNSW Open Data Hub](https://opendata.transport.nsw.gov.au/).
 
 ## Development
+
+Configure your API key as an environment variable in your `.env` file:
+
+```
+NSW_TRANSPORT_API_KEY="your_api_key_here"
+```
 
 Install dependencies:
 ```bash
@@ -65,27 +90,9 @@ For development with auto-rebuild:
 npm run watch
 ```
 
-## Installation
-
-To use with Claude Desktop, add the server config:
-
-On MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "TfNSW Realtime Alerts MCP Server": {
-      "command": "/path/to/TfNSW Realtime Alerts MCP Server/build/index.js"
-    }
-  }
-}
-```
-
 ### Debugging
 
-Since MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), which is available as a package script:
+You can use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector) for debugging, which is available as a package script:
 
 ```bash
 npm run inspector
